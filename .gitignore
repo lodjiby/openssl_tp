@@ -4,6 +4,9 @@ myRSA2048.pem
 ca-private-key.pem
 ca_keyPair.pem
 *.sign
-*.enc
+bigfile.pdf.enc
+rsa_text.txt.enc
+rsatext.txt.enc
+text.txt.enc
 tp.sh
 .test_tp.sh.swp
