@@ -1,4 +1,8 @@
-*.pem
+keyPair.pem
+keyPair_public.pem
+myRSA2048.pem
+ca-private-key.pem
+ca_keyPair.pem
 *.sign
 tp.sh
 .test_tp.sh.swp

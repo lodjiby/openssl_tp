@@ -12,7 +12,7 @@ function partie_3() {
 	local ENC_FILE="$TEXT_FILE.enc" # file containing the encryption
 
 
-	echo -e "\t you are at the third (3ed) part:"
+	echo -e "\t you are at the third (3rd) part:"
 	echo -e "\ttype q or Q to quit this part (part 2)"
 	echo -e "\taccepted arguments (3 4 5)"
 	echo -e "\t============================================"
@@ -32,7 +32,7 @@ function partie_3() {
 		if [ "$input" == 4 ]; then    # handle the fourth (4)question
 			
 				 openssl enc -aes-256-cbc -salt -in "$TEXT_FILE" -out "$ENC_FILE" -k "$PASSWD_FILE"  &> /dev/null
-				 echo -e "\033[31mencryption file ----> $ENC_FILE\033[0M" 
+				 echo -e "\033[31mencryption file ----> $ENC_FILE, with passord --------> "$PASSWD_FILE"\033[0M" 
 				 
 			 
 			 	 openssl enc -d -aes-256-cbc -salt -in "$ENC_FILE" -out "$TEXT_FILE" -k "$PASSWD_FILE" &> /dev/null
@@ -68,10 +68,10 @@ function partie_4() {
 	echo -e "\ttype q or Q to terminate this part"
 
 
-	local RSA_TEXT_FILE="rsatext.txt"
+	local RSA_TEXT_FILE="rsa_text.txt"
 	local RSA_LONG_TEXT_FILE="bigfile.pdf"
-	local RSA_ENC_LONG_TEXT_FILE="$RSA_LONG_TEXT_FIL".enc
-	local RSA_PASSWD_FILE="rsapasswd.txt"
+	local RSA_ENC_LONG_TEXT_FILE="$RSA_LONG_TEXT_FILE".enc
+	local RSA_PASSWD_FILE="rsa_passwd.txt"
 	local RSA_ENC_FILE="$RSA_TEXT_FILE".enc
 	local ACCEPTED_VALUES=($(seq 6 16))
 
@@ -166,7 +166,7 @@ function partie_4() {
 
 		fi
 		if [ "$input" == 13 ]; then
-			echo -e "\033[31mOui on peut conserver la clef public en calir, ce qui actuellement le cas.\033[0m"
+			echo -e "\033[31mOui on peut conserver la clef public en calir, ce qui est actuellement le cas.\033[0m"
 		fi
                 if [ "$input" == 14 ]; then
 			echo -e "\033[31mtext to be encrypted: $RSA_TEXT_FILE\033[0m"
@@ -175,9 +175,9 @@ function partie_4() {
 
 		fi
 		if [ "$input" == 15 ]; then
-			 openssl rsautl -encrypt -inkey keyPair_public.pem -pubin -in "$RSA_LONG_TEXT_FIL" -out "$RSA_ENC_LONG_TEXT_FIL" &> /dev/null
+			 openssl rsautl -encrypt -inkey keyPair_public.pem -pubin -in "$RSA_LONG_TEXT_FILE" -out "$RSA_ENC_LONG_TEXT_FILE" &> /dev/null
 			# description du resultat obtenu
-			
+			echo -e "\033[31mencrypted text: ----------> $\033[0m" 
 			echo " description: "
 		fi
 		if [ "$input" == 16 ]; then
@@ -211,7 +211,7 @@ function partie_5() {
 	local SIGNED_MESSAGE2="$MESSAGE2".sign
 	local MESSAGE3="message3.txt"
         local SIGNED_MESSAGE3="$MESSAGE3".sign
-	local RSA_PASSWD_FILE="rsapasswd.txt"
+	local RSA_PASSWD_FILE="rsa_passwd.txt"
 
 
 	echo -e "\t This is the fith (5th) part:"
@@ -270,8 +270,8 @@ function partie_6() {
                       
 
 	local ACCETED_VALUES=($(seq 21 28))
-	local CA_PASSWD_FILE="capasswd.txt"
-	local RSA_PASSWD_FILE="rsapasswd.txt" 
+	local CA_PASSWD_FILE="ca_passwd.txt"
+	local RSA_PASSWD_FILE="rsa_passwd.txt" 
 
 	echo -e "\t This is the fith (6th) part:"
 	echo -e "\t Type q or Q to quit this part"
@@ -431,7 +431,7 @@ while true; do
 	while [ $i -lt ${#ACCETED_VALUES[@]} ] && [ "$input" != ${ACCETED_VALUES[$i]} ]; do
 			((++i))
 	done
-	if [ ! $i -lt ${#ACCETED_VALUES[@]} ]; then
+	if [  $i -gt ${#ACCETED_VALUES[@]} ]; then
 		echo -n "Accepted arguments are :"
 		echo "${ACCEPTED_VALUES[@]}"
 	fi
