@@ -1,0 +1,20 @@
+[ req ]
+default_bits        = 2048
+default_keyfile     = ca-private-key.pem
+distinguished_name  = req_distinguished_name
+x509_extensions     = v3_req
+#string_mask         = utf8
+
+[ req_distinguished_name ]
+C  = SN
+ST = Dakar
+L  = Dakar	
+O  = My Certification Authority
+OU = Root CA
+CN = My Root CA
+emailAddress =
+
+[ v3_req ]
+keyUsage = critical, digitalSignature, keyCertSign, cRLSign
+extendedKeyUsage = serverAuth, clientAuth
+

@@ -1,0 +1,20 @@
+[ req ]
+default_bits        = 2048
+default_keyfile     = keyPair.pem
+distinguished_name  = req_distinguished_name
+x509_extensions     = v3_req
+
+# Configuration de l'extension du certificat
+[ v3_req ]
+keyUsage = critical, digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+
+[ req_distinguished_name ]
+C  = SN
+ST = Dakar
+L  = Dakar
+O  = DCSSI
+OU = IT
+CN = dcssi.sn
+emailAddress =
+

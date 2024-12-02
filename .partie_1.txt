@@ -1,0 +1,7 @@
+$ openssl enc -base64 -in fichier:
+--> Encodage du fichier en base 54
+openssl enc -base64 -d -in fichier :
+--> Decodage du fichier en base 64
+$ openssl enc <-algo> -in <claire.txt> -out <chiffre.enc> :
+--> Chiffrement, en utilisant "algo", du calir "clair.txt"
+
