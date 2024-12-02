@@ -63,11 +63,6 @@ function partie_3() {
 function partie_4() {
 
 
- 	echo -e "\t you're in the fourth (4th) part:"
-	echo -e "\t Chiffrement Asymétrique"
-	echo -e "\ttype q or Q to terminate this part"
-
-
 	local RSA_TEXT_FILE="rsa_text.txt"
 	local RSA_LONG_TEXT_FILE="bigfile.pdf"
 	local RSA_ENC_LONG_TEXT_FILE="$RSA_LONG_TEXT_FILE".enc
@@ -75,6 +70,10 @@ function partie_4() {
 	local RSA_ENC_FILE="$RSA_TEXT_FILE".enc
 	local ACCEPTED_VALUES=($(seq 6 16))
 
+	
+ 	echo -e "\t you're in the fourth (4th) part:"
+	echo -e "\t Chiffrement Asymétrique"
+	echo -e "\ttype q or Q to terminate this part"
 	echo -e "\taccepted arguments: (${ACCEPTED_VALUES[@]})"
 	echo -e "\t====================================================="
 
@@ -94,15 +93,16 @@ function partie_4() {
 		if [ ! $i -lt ${#ACCEPTED_VALUES[@]} ]; then
 			echo -n "accepted values are:"
 			echo ${ACCEPTED_VALUES[@]}
-			break;
+#			break;
 		fi
 
 		if [ "$input" == 6 ]; then
 			openssl genpkey -algorithm RSA -out myRSA2048.pem -pkeyopt rsa_keygen_bits:2048 &> /dev/null # paire de clef RSA
-			echo " Key pair in  -----> myRSA2048.pem"
+			echo -e "\033[31mKey pair in  -----> myRSA2048.pem\033[0m"
 			echo -e "\033[31mVoici le résultat de la commande more myRSA2048.pem:\033[0m"
 			echo ""
 			more myRSA2048.pem
+			echo ""
 			echo -n -e "\033[31ma.\033[0m"
 			echo -n -e "\033[31mCe fichier contient un text, sans signification, encadrer par:\033[0m "
 			echo -e "\033[31m-----BEGIN PRIVATE KEY----- et -----END PRIVATE KEY-----\033[0m"
@@ -112,7 +112,7 @@ function partie_4() {
 			echo -e "\033[31mresultat de la command 'openssl rsa -in myRSA2048.pem -text'\033[0m"
 			echo ""
 			openssl rsa -in myRSA2048.pem -text
-			echo "============================================"
+			echo ""
 			echo -e "\033[31mresultat contient le modulo, les exposant e et d, et les deux nombres premiers, en hexadecimal.\033[0m"
 
 		fi
@@ -177,7 +177,7 @@ function partie_4() {
 		if [ "$input" == 15 ]; then
 			 openssl rsautl -encrypt -inkey keyPair_public.pem -pubin -in "$RSA_LONG_TEXT_FILE" -out "$RSA_ENC_LONG_TEXT_FILE" &> /dev/null
 			# description du resultat obtenu
-			echo -e "\033[31mencrypted text: ----------> $\033[0m" 
+			echo -e "\033[31mencrypted text: ----------> $RSA_ENC_LONG_TEXT_FILE\033[0m" 
 			echo " description: "
 		fi
 		if [ "$input" == 16 ]; then
@@ -215,7 +215,7 @@ function partie_5() {
 
 
 	echo -e "\t This is the fith (5th) part:"
-	echo -e "\t Type q or Q to quit this part"
+	echo -e "\t ===> Type q or Q to quit this part"
 	echo -e "\taccepted options: (${ACCETED_VALUES[@]})"
 	echo -e "\t==================================================="
 
@@ -274,7 +274,7 @@ function partie_6() {
 	local RSA_PASSWD_FILE="rsa_passwd.txt" 
 
 	echo -e "\t This is the fith (6th) part:"
-	echo -e "\t Type q or Q to quit this part"
+	echo -e "\t ===> Type q or Q to quit this part"
 	echo -e "\t accepted arguments: ${ACCETED_VALUES[@]}"
 	echo -e "\t==================================================="
 
@@ -364,7 +364,7 @@ function partie_2() {
 	local PASSWD_FILE="passwd.txt"
 
 	echo -e "\t This is the second (2nd) part:"
-	echo -e "\t Type q or Q to quit this part"
+	echo -e "\t ===> Type q or Q to quit this part"
 	echo -e "\t accepted arguments: (${ACCETED_VALUES[@]})"
 
 
@@ -390,7 +390,7 @@ function partie_2() {
 			openssl enc -base64 -in "$PASSWD_FILE" -out base64.passwd.txt
 			echo -e "\033[31m mot de passe encodé dans -----> base64.passwd.txt \033[0m"
 		fi
-		if ["$input" ==  2 ]; then
+		if [ "$input" ==  2 ]; then
 			echo -e "\033[31mNon, Il n'est pas sûr de protéger par ce moyen.\033[0m"
 		fi
 	done
@@ -401,7 +401,9 @@ function partie_2() {
 # function for partie 1
 function partie_1() {
 
+	echo "==============================================================================="
 	cat .partie_1.txt
+	echo "==============================================================================="
 }
 
 
@@ -412,15 +414,20 @@ function partie_1() {
 #==================FONCTION CALLS===================================================
 
 
-	echo -e "\t TP OPENSSL"
-	echo -e "\t type q or Q to quit"
 
         ACCEPTED_VALUES=("partie_1" "partie_2" "partie_3" "partie_4" "partie_5" "partie_6")
+	
+        
 
+while true; do	
+
+       # ACCEPTED_VALUES=("partie_1" "partie_2" "partie_3" "partie_4" "partie_5" "partie_6")
+	
+	echo -e "\t TP OPENSSL"
+	echo -e "\t ==> type q or Q to quit"
 	echo "entrer une partie: ( ${ACCEPTED_VALUES[@]} )" 
 
-while true; do
-	echo -n "partie_x> "
+	echo -n "entrer une partie:> "
 	read input
 
 	if [ "$input" == "q" ] || [ "$input" == "Q" ]; then
@@ -483,9 +490,7 @@ done
 
 
 
-# calling functions
 
-#partie_6
 
 
 
