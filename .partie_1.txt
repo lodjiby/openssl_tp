@@ -1,7 +1,35 @@
-$ openssl enc -base64 -in fichier:
---> Encodage du fichier en base 54
-openssl enc -base64 -d -in fichier :
---> Decodage du fichier en base 64
-$ openssl enc <-algo> -in <claire.txt> -out <chiffre.enc> :
---> Chiffrement, en utilisant "algo", du calir "clair.txt"
-
+• $ openssl enc -base64 -in fichier :
+===> encodage du fichier en hexadécimal
+• $ openssl enc -base64 -d -in fichier :
+===> decodage du fichier (codé en hexadécimal)
+• $ openssl enc <-algo> -in <claire.txt> -out <chiffre.enc> :
+===> choffrement, en utilisant -algo de laire.txt; la sortie est chiffre.enc.
+• $ openssl enc <-algo> -in <chiffre> -d -out <claire> :
+===> déchiffrement, en utilisant -algo, de <chiffre>; la sortie est  <claire>.
+• $ openssl enc -aes-256-cbc -salt -in file.txt -out file.enc -k password
+===> chiffrement, en utilisant -aes-256-cbc, de file.txt, avec le mot de passe password
+• $ openssl enc -d -aes-256-cbc -in file.enc -out file.txt -k password:
+===> déchiffrement, en utilisant -aes-256-cbc, de file.enc, avec le mot de pass password.
+• $ openssl genrsa -out <fichier_rsa.priv> <size>:
+===> générer une clef privée rsa, de taille <size>.
+• $ openssl rsa -in <fichier_rsa.priv> -des3 -out <fichier.pem>:
+===> chiffer la clef <fichier_rsa.priv> avec l'algorith des3; la sortie est  <fichier.pem>.    
+• $ openssl rsa -in <fichier_rsa.priv> -pubout -out <fichier_rsa.pub>:
+===> dériver la clef publique <fichier_rsa.pub> a partir de la clef privée <fichier_rsa.priv>.
+• $ openssl genrsa -des3 -out clé-privée taille
+===> générer une clef privée rsa, de taille "taille", en utilisant des3.
+• $ openssl dgst -sha256 -sign <rsa.priv> -out <signature_file> <Fichier_a_signer>
+===> signer le fichier <Fichier_a_signer> avec la clef privée <rsa.priv>; la sortie est <signature_file>.
+• $ openssl dgst -sha256 -verify <rsa.pub> -signature <signature_file> <Fichier_a_verifier>
+===> verifier <Fichier_a_verifier> avec la clef publique <rsa.pub>.
+• $ openssl req -new -key clé -out requête
+===> formuler une requête de certificat.
+• $ openssl x509 -in certificat -text -noout
+===> afficher les informations sur " certificat"
+• $ openssl x509 -req -in requête -signkey clé-privee -out certificat
+===> signer "requête" avec la clef "clé-privee"; la sortie est "certificat"
+• $ openssl x509 -days duree -CAserial serial -CA certificat -CAkey clé -in requête -req -out
+certificat
+===> signer "requête" en utilisant "certficat"; le certicat resultant dure  "duree". 
+• $ openssl verify -CAfile ca-certificat certificat
+===> vérifie le la validité du certificat "certificat"
